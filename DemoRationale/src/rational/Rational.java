@@ -29,7 +29,7 @@ public class Rational {
         return this.numenator;
     }
     
-    void normalize(){
+    final void normalize(){
         var tmp = greatestCommonDenominator(this.numenator, this.denominator);
         if(tmp > 1){
             this.numenator /= tmp;
@@ -46,7 +46,7 @@ public class Rational {
         normalize();
     }
     
-    public void setDenominator(int denominator){
+    final public void setDenominator(int denominator){
         if(denominator == 0){
             throw new IllegalArgumentException("Denumenator must not be zero");
         }
@@ -62,5 +62,20 @@ public class Rational {
         else{
             return this.numenator + "/" + this.denominator;
         }
+    }
+    
+    @Override
+    public boolean equals(Object o){
+        if (o == this){
+            return true;
+        }
+        
+        if (!(o instanceof Rational)){
+            return false;
+        }
+        
+        Rational r = (Rational)o;
+        
+        return (this.getNumerator() == r.getNumerator()) && (this.getDenominator() == r.getDenominator());
     }
 }

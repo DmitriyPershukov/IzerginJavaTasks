@@ -11,6 +11,11 @@ public class Complex {
         this.imaginary = new Rational(imaginary.getNumerator(), imaginary.getDenominator());
     }
     
+    public Complex(Rational real){
+        this.real = new Rational(real.getNumerator(), real.getDenominator());
+        this.imaginary = new Rational(0);
+    }
+    
     public Rational getReal(){
         return new Rational(this.real.getNumerator(), this.real.getDenominator());
     }
@@ -27,5 +32,20 @@ public class Complex {
         else{
             return real + " - " + new Rational(-1 * imaginary.getNumerator(), imaginary.getDenominator()) + "i";
         }
+    }
+    
+    @Override
+    public boolean equals(Object o){
+        if (o == this){
+            return true;
+        }
+        
+        if (!(o instanceof Complex)){
+            return false;
+        }
+        
+        Complex c = (Complex)o;
+        
+        return (this.getReal().equals(c.getReal())) && (this.getImaginary().equals(c.getImaginary()));
     }
 }

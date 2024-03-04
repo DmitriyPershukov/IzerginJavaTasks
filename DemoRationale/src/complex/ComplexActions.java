@@ -1,6 +1,7 @@
 package complex;
 
 import rational.RationalActions;
+import rational.Rational;
         
 public class ComplexActions {
     public static Complex add(Complex a, Complex b){
@@ -16,7 +17,11 @@ public class ComplexActions {
     }
     
     public static Complex divide(Complex a, Complex b){
-        throw new java.lang.UnsupportedOperationException();
-        //return new Complex(a.getNumerator() * b.getDenominator(), a.getDenominator() * b.getNumerator());
+        Rational realPartNumenator = RationalActions.add(RationalActions.multiply(a.getReal(), b.getReal()), RationalActions.multiply(a.getImaginary(), b.getImaginary()));
+        Rational complexDenominator = RationalActions.add(RationalActions.multiply(b.getReal(), b.getReal()), RationalActions.multiply(b.getImaginary(), b.getImaginary()));
+        Rational imaginaryPartNumenator = RationalActions.subtract(RationalActions.multiply(a.getImaginary(), b.getReal()), RationalActions.multiply(a.getReal(), b.getImaginary()));
+        Rational realPart = RationalActions.divide(realPartNumenator, complexDenominator);
+        Rational imaginaryPart = RationalActions.divide(imaginaryPartNumenator, complexDenominator);
+        return new Complex(realPart, imaginaryPart);
     }
 }
