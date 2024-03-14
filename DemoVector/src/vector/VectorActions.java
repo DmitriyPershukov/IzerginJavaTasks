@@ -41,7 +41,7 @@ public class VectorActions {
         }
         return new Vector(productElements);
     }
-    
+
     public static boolean areVectorsСollinear(Vector a, Vector b){
         if(a.getLength() != b.getLength()){
             throw new java.lang.IllegalArgumentException("Vector should be of the same size");
@@ -49,24 +49,34 @@ public class VectorActions {
         if(a.getLength() == 0){
             return true;
         }
-        double coefficient = a.getElement(0) / b.getElement(0);
-        for(int i = 1; i < a.getLength(); i++){
-            if(a.getElement(i) == 0 && b.getElement(i) == 0){
+        double coefficient = 0;
+        boolean coefficientSet = false;
+        for(int i = 0; i < a.getLength(); i++){
+            if(a.getElement(i) < 0.0001 && b.getElement(i) < 0.0001){
                 continue;
             }
-            else if(a.getElement(i) == 0){
+            else if(a.getElement(i) < 0.0001){
                 return false;
             }
-            else if(b.getElement(i) == 0){
+            else if(b.getElement(i) < 0.0001){
                 return false;
-            }
-            double newCoefficient = a.getElement(i) / b.getElement(i);
-            if(Math.abs(newCoefficient - coefficient) < 0.0001){
-                coefficient = newCoefficient;
             } else{
-                return false;
+                if(coefficientSet){
+                    double newCoefficient = a.getElement(i) / b.getElement(i);
+                    if(Math.abs(newCoefficient - coefficient) < 0.0001){
+                        coefficient = newCoefficient;
+                    } else{
+                        return false;
+                    }
+                } else{
+                    coefficient = a.getElement(i) / b.getElement(i);
+                }
             }
         }
         return true;
+    }
+    
+    public static boolean areVectorsOrthogonal(Vector a, Vector b){
+        return VectorActions.dotProduct(a, b) < 0.0001;
     }
 }
