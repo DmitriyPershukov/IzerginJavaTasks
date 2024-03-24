@@ -2,11 +2,12 @@ package state;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class District {
     private String name;
     private City administrativeCenter;
-    private ArrayList<City> cities;
+    private List<City> cities;
     private int area;
     
     public District(String name){
@@ -54,8 +55,8 @@ public class District {
         }
     }
     
-    public ArrayList<City> getCities(){
-        return (ArrayList<City>)this.cities.clone();
+    public List<City> getCities(){
+        return List.copyOf(this.cities);
     }
     
     public boolean removeCity(City city){
@@ -80,7 +81,10 @@ public class District {
     
     @Override
     public boolean equals(Object other){
-        if(other instanceof District){
+        if (this == other){
+            return true;
+        }
+        if(other != null && other.getClass() == this.getClass()){
             return this.name.equals(((District)other).getName());
         } else{
             return false;

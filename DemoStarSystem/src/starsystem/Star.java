@@ -1,9 +1,9 @@
-package state;
+package starsystem;
 
-public class City {
+public class Star {
     private String name;
     
-    public City(String name){
+    public Star(String name){
         this.name = name;
     }
     
@@ -16,19 +16,19 @@ public class City {
     }
     
     @Override
-    public boolean equals(Object other){
+    public boolean equals(Object other) {
         if (this == other){
             return true;
         }
         if(other != null && other.getClass() == this.getClass()){
-            return this.name.equals(((City)other).getName());
+            return this.name.equals(((Star)other).getName());
         } else{
             return false;
         }
     }
-    
+
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return this.name.hashCode();
     }
     

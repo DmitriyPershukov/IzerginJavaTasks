@@ -2,6 +2,7 @@ package state;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Oblast {
     private String name;
@@ -31,8 +32,8 @@ public class Oblast {
         }
     }
     
-    public ArrayList<District> getDistricts(){
-        return (ArrayList<District>)this.districts.clone();
+    public List<District> getDistricts(){
+        return List.copyOf(this.districts);
     }
     
     public boolean removeDistrict(District district){
@@ -61,7 +62,10 @@ public class Oblast {
     
     @Override
     public boolean equals(Object other){
-        if(other instanceof Oblast){
+        if (this == other){
+            return true;
+        }
+        if(other != null && other.getClass() == this.getClass()){
             return this.name.equals(((Oblast)other).getName());
         } else{
             return false;

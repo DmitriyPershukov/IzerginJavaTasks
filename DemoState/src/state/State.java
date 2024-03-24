@@ -1,12 +1,12 @@
 package state;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class State {
     private String name;
     private City capital;
-    private ArrayList<Oblast> oblasts;
+    private List<Oblast> oblasts;
     
     public State(String name){
         this.name = name;
@@ -20,7 +20,7 @@ public class State {
     public State(String name, City capital, Oblast... oblasts){
         this.name = name;
         this.capital = capital;
-        this.oblasts = new ArrayList<>(Arrays.asList(oblasts));
+        this.oblasts = Arrays.asList(oblasts);
     }
     
     public void addOblast(Oblast oblast){
@@ -31,8 +31,8 @@ public class State {
         }
     }
     
-    public ArrayList<Oblast> getOblasts(){
-        return (ArrayList<Oblast>)this.oblasts.clone();
+    public List<Oblast> getOblasts(){
+        return List.copyOf(this.oblasts);
     }
     
     public boolean removeOblast(Oblast oblast){
@@ -57,7 +57,10 @@ public class State {
     
     @Override
     public boolean equals(Object other){
-        if(other instanceof State){
+        if (this == other){
+            return true;
+        }
+        if(other != null && other.getClass() == this.getClass()){
             return this.name.equals(((State)other).getName());
         } else{
             return false;
@@ -77,14 +80,23 @@ public class State {
     public int hashCode(){
         return this.name.hashCode();
     }
-    
-    public void printInfo(){
+       
+    public void printCapital(){
         System.out.println("Столица: " + this.capital);
+    }
+    
+    public void printNumberOfOblasts(){
         System.out.println("Количество областей: " + this.oblasts.size());
+    }
+        
+    public void printArea(){
         System.out.println("Площадь: " + getArea());
+    }
+        
+    public void printOblastsAdministrativeCenters(){
         System.out.println("Областные центры:");
         for (Oblast oblast: this.oblasts){
             System.out.println(oblast.getAdministrativeCenter().getName());
-        }
+        } 
     }
 }

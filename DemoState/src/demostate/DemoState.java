@@ -16,6 +16,9 @@ public class DemoState {
         Oblast o1 = new Oblast("Челябинская область", c1, d1, d2);
         Oblast o2 = new Oblast("Московская область", c3, d3);
         State s1 = new State("Россия", c3, o1, o2);
-        s1.printInfo();
+        s1.printCapital();
+        s1.printNumberOfOblasts();
+        s1.printArea();
+        s1.printOblastsAdministrativeCenters();
     }   
 }
